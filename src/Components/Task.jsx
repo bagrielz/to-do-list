@@ -1,12 +1,7 @@
 import React from "react";
-import TaskInput from "./TaskInput";
 
-const Task = () => {
-  return (
-    <form>
-      <TaskInput />
-    </form>
-  );
+const Task = ({ children }) => {
+  return <li>{children}</li>;
 };
 
 export default Task;

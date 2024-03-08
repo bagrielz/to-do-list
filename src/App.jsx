@@ -1,10 +1,10 @@
 import React from "react";
-import Task from "./Components/Task";
+import TaskContent from "./Components/TaskContent";
 
 const App = () => {
   return (
     <div>
-      <Task />
+      <TaskContent />
     </div>
   );
 };

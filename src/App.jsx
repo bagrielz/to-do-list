@@ -3,7 +3,7 @@ import TaskContent from "./Components/TaskContent";
 
 const App = () => {
   return (
-    <div>
+    <div className="App">
       <TaskContent />
     </div>
   );

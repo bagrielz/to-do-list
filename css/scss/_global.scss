@@ -1,0 +1,17 @@
+* {
+  font-family: "Fira Code", monospace !important;
+  font-size: 1rem;
+}
+
+body {
+  background: #2e2e36;
+  max-width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  margin-top: 96px;
+}

@@ -211,18 +211,28 @@ body {
   transition: 0.3s;
 }
 
-.tasks li div {
-  display: flex;
-  gap: 16px;
-}
-
-.tasks li div svg {
-  cursor: pointer;
-}
-
 .tasks li:hover {
   background: rgba(150, 255, 141, 0.1);
   color: #96ff8d;
+}
+
+.tasks li input {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0;
+}
+
+.tasks li input:focus {
+  outline: none;
+}
+
+.tasks li .iconBtn {
+  cursor: pointer;
+}
+
+.tasks li .iconBtn:nth-child(1) {
+  margin-right: 16px;
 }
 
 .task-enter {
@@ -234,4 +244,10 @@ body {
 .task-enter-active {
   opacity: 1;
   transform: translateY(0);
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
 }

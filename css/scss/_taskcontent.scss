@@ -58,16 +58,24 @@
     border-radius: 4px;
     color: rgba($color: #fff, $alpha: 0.8);
     transition: 0.3s;
-    div {
-      display: flex;
-      gap: 16px;
-      svg {
-        cursor: pointer;
-      }
-    }
     &:hover {
       background: rgba($color: #96ff8d, $alpha: 0.1);
       color: #96ff8d;
+    }
+    input {
+      background: transparent;
+      border: none;
+      color: rgba($color: #fff, $alpha: 0.8);
+      padding: 0;
+      &:focus {
+        outline: none;
+      }
+    }
+    .iconBtn {
+      cursor: pointer;
+      &:nth-child(1) {
+        margin-right: 16px;
+      }
     }
   }
 }
@@ -81,4 +89,10 @@
 .task-enter-active {
   opacity: 1;
   transform: translateY(0);
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
 }

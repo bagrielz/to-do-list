@@ -8,8 +8,8 @@ const TaskContent = () => {
   const [value, setValue] = React.useState("");
   const [active, setActive] = React.useState("task-enter");
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
   }
 
   function handleTask() {
@@ -24,8 +24,20 @@ const TaskContent = () => {
     }
   }
 
-  function handleValue(event) {
-    setValue(event.target.value);
+  function handleTaskUpdate(newValue, index) {
+    // Atualiza a array de tasks com o novo valor ou exclui a tarefa
+    if (newValue !== null) {
+      const updatedTasks = [...tasks];
+      updatedTasks[index] = newValue;
+      setTasks(updatedTasks);
+    } else {
+      const updatedTasks = tasks.filter((_, i) => i !== index);
+      setTasks(updatedTasks);
+    }
+  }
+
+  function handleValue(e) {
+    setValue(e.target.value);
   }
 
   return (
@@ -35,8 +47,13 @@ const TaskContent = () => {
         <Button onClick={handleTask} />
       </div>
       <ul className="tasks">
-        {tasks.map((task) => (
-          <Task active={active} key={task} onClick={handleTask}>
+        {tasks.map((task, index) => (
+          <Task
+            active={active}
+            key={index}
+            index={index}
+            handleTaskUpdate={handleTaskUpdate}
+          >
             {task}
           </Task>
         ))}

@@ -3,7 +3,7 @@ import Edit from "../assets/Edit.svg?react";
 import Trash from "../assets/Trash.svg?react";
 import Check from "../assets/Check.svg?react";
 
-const Task = ({ children, active, index, handleTaskUpdate }) => {
+const Task = ({ children, active, index, handleTaskUpdate, maxLength }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [newValue, setNewValue] = React.useState(children);
 
@@ -12,7 +12,9 @@ const Task = ({ children, active, index, handleTaskUpdate }) => {
   }
 
   function handleInputChange(e) {
-    setNewValue(e.target.value);
+    if (e.target.value.length <= maxLength) {
+      setNewValue(e.target.value);
+    }
   }
 
   function handleInputBlur() {

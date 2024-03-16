@@ -63,6 +63,7 @@
       color: #96ff8d;
     }
     input {
+      width: 80%;
       background: transparent;
       border: none;
       color: rgba($color: #fff, $alpha: 0.8);
@@ -95,4 +96,27 @@
   background: transparent;
   border: none;
   padding: 0;
+}
+
+.addTask {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 300ms, transform 300ms;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+
+  height: 40px;
+  background: #96ff8d;
+  padding: 0 16px;
+  border-radius: 4px;
+  &.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

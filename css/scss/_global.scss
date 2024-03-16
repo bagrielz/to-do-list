@@ -1,6 +1,10 @@
 * {
   font-family: "Fira Code", monospace !important;
   font-size: 1rem;
+  &::selection {
+    background: #96ff8d;
+    color: #363a49;
+  }
 }
 
 body {

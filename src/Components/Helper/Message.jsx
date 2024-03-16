@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddTask = ({ show, onClose }) => {
+const Message = ({ text, backgroundColor, show }) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -9,19 +9,21 @@ const AddTask = ({ show, onClose }) => {
       // Oculta a mensagem após 3 segundos
       const timeoutId = setTimeout(() => {
         setIsVisible(false);
-        onClose();
       }, 3000);
 
       // Limpa o timeout ao desmontar o componente
       return () => clearTimeout(timeoutId);
     }
-  }, [show, onClose]);
+  }, [show]);
 
   return (
-    <div className={`addTask ${isVisible ? "show" : ""}`}>
-      <span>Task adicionada</span>
+    <div
+      className={`message ${isVisible ? "show" : ""}`}
+      style={{ backgroundColor: backgroundColor }}
+    >
+      <span>{text}</span>
     </div>
   );
 };
 
-export default AddTask;
+export default Message;

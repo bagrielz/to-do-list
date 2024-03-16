@@ -3,7 +3,14 @@ import Edit from "../assets/Edit.svg?react";
 import Trash from "../assets/Trash.svg?react";
 import Check from "../assets/Check.svg?react";
 
-const Task = ({ children, active, index, handleTaskUpdate, maxLength }) => {
+const Task = ({
+  children,
+  active,
+  index,
+  handleTaskUpdate,
+  handleTaskDelete,
+  maxLength,
+}) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [newValue, setNewValue] = React.useState(children);
 
@@ -21,6 +28,10 @@ const Task = ({ children, active, index, handleTaskUpdate, maxLength }) => {
     setIsEditing(false);
 
     if (newValue !== children) handleTaskUpdate(newValue, index);
+  }
+
+  function handleDeleteClick() {
+    handleTaskDelete(index);
   }
 
   return (
@@ -45,7 +56,7 @@ const Task = ({ children, active, index, handleTaskUpdate, maxLength }) => {
             <button className="iconBtn" onClick={handleEditClick}>
               <Edit />
             </button>
-            <button className="iconBtn">
+            <button className="iconBtn" onClick={handleDeleteClick}>
               <Trash />
             </button>
           </div>

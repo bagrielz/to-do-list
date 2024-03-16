@@ -2,42 +2,21 @@ import React from "react";
 import Input from "./Helper/Input";
 import Button from "./Helper/Button";
 import Task from "./Task";
-import AddTask from "./Helper/AddTask";
+import Message from "./Helper/Message";
 
 const TaskContent = () => {
   const [tasks, setTasks] = React.useState([]);
   const [value, setValue] = React.useState("");
   const [active, setActive] = React.useState("task-enter");
-  const [showAddTask, setShowAddTask] = React.useState(false);
-  const maxLength = 35; // Defina o limite de caracteres desejado
+  const [message, setMessage] = React.useState({
+    show: false,
+    text: "",
+    backgroundColor: "",
+  });
+  const maxLength = 35;
 
   function handleSubmit(e) {
     e.preventDefault();
-  }
-
-  function handleTask() {
-    if (value.trim() !== "") {
-      // Verifica se o valor não está vazio ou contém apenas espaços em branco
-      setTasks([...tasks, value]);
-      setTimeout(() => {
-        setActive("task-enter-active");
-      }, 10);
-      setActive("task-enter");
-      setValue(""); // Limpa o valor do input após adicionar a task
-      setShowAddTask(true);
-    }
-  }
-
-  function handleTaskUpdate(newValue, index) {
-    // Atualiza a array de tasks com o novo valor ou exclui a tarefa
-    if (newValue !== null) {
-      const updatedTasks = [...tasks];
-      updatedTasks[index] = newValue;
-      setTasks(updatedTasks);
-    } else {
-      const updatedTasks = tasks.filter((_, i) => i !== index);
-      setTasks(updatedTasks);
-    }
   }
 
   function handleValue(e) {
@@ -46,16 +25,56 @@ const TaskContent = () => {
     }
   }
 
-  function handleCloseAddTask() {
-    setShowAddTask(false);
+  function handleTaskAdd() {
+    if (value.trim() !== "") {
+      setTasks([...tasks, value]);
+      setTimeout(() => {
+        setActive("task-enter-active");
+      }, 10);
+      setActive("task-enter");
+      setValue("");
+      showMessage("add"); // Chama showMessage para adicionar tarefa
+    }
   }
+
+  function handleTaskUpdate(newValue, index) {
+    if (newValue !== null) {
+      const updatedTasks = [...tasks];
+      updatedTasks[index] = newValue;
+      setTasks(updatedTasks);
+      showMessage("edit"); // Chama showMessage para editar tarefa
+    } else {
+      handleTaskDelete(index); // Chama a função para deletar a tarefa
+    }
+  }
+
+  function handleTaskDelete(index) {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+    showMessage("delete");
+  }
+
+  function showMessage(action) {
+    const messages = {
+      add: { text: "Task adicionada", backgroundColor: "#96FF8D" },
+      edit: { text: "Task alterada", backgroundColor: "#9BA5FF" },
+      delete: { text: "Task deletada", backgroundColor: "#FF8A73" },
+    };
+
+    setMessage({ show: true, ...messages[action] });
+    setTimeout(() => {
+      setMessage({ show: false, text: "", backgroundColor: "" });
+    }, 3000);
+  }
+
+  console.log(showMessage);
 
   return (
     <>
       <form onClick={handleSubmit}>
         <div className="inputContent">
           <Input onChange={handleValue} maxLength={maxLength} />
-          <Button onClick={handleTask} />
+          <Button onClick={handleTaskAdd} />
         </div>
         <ul className="tasks">
           {tasks.map((task, index) => (
@@ -64,6 +83,7 @@ const TaskContent = () => {
               key={index}
               index={index}
               handleTaskUpdate={handleTaskUpdate}
+              handleTaskDelete={handleTaskDelete}
               maxLength={maxLength}
             >
               {task}
@@ -71,7 +91,7 @@ const TaskContent = () => {
           ))}
         </ul>
       </form>
-      <AddTask show={showAddTask} onClose={handleCloseAddTask} />
+      <Message {...message} />
     </>
   );
 };

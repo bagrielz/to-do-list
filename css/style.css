@@ -258,7 +258,7 @@ body {
   padding: 0;
 }
 
-.addTask {
+.message {
   opacity: 0;
   transform: translateX(20px);
   transition: opacity 300ms, transform 300ms;
@@ -269,12 +269,11 @@ body {
   bottom: 32px;
   right: 32px;
   height: 40px;
-  background: #96ff8d;
   padding: 0 16px;
   border-radius: 4px;
 }
 
-.addTask.show {
+.message.show {
   opacity: 1;
   transform: translateX(0);
 }

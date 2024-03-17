@@ -67,8 +67,6 @@ const TaskContent = () => {
     }, 3000);
   }
 
-  console.log(showMessage);
-
   return (
     <>
       <form onClick={handleSubmit}>

@@ -1,18 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "./Helper/Input";
 import Button from "./Helper/Button";
 import Task from "./Task";
 import Message from "./Helper/Message";
 
 const TaskContent = () => {
-  const [tasks, setTasks] = React.useState([]);
-  const [value, setValue] = React.useState("");
-  const [active, setActive] = React.useState("task-enter");
-  const [message, setMessage] = React.useState({
-    show: false,
-    text: "",
-    backgroundColor: "",
-  });
+  const [tasks, setTasks] = useState([]);
+  const [value, setValue] = useState("");
+  const [active, setActive] = useState("task-enter");
+  const [messages, setMessages] = useState([]);
   const maxLength = 35;
 
   function handleSubmit(e) {
@@ -61,18 +57,16 @@ const TaskContent = () => {
       delete: { text: "Task deletada", backgroundColor: "#FF8A73" },
     };
 
-    setMessage({ show: true, ...messages[action] });
-    setTimeout(() => {
-      setMessage({ show: false, text: "", backgroundColor: "" });
-    }, 3000);
+    // Adiciona a nova mensagem à lista de mensagens
+    setMessages((prevMessages) => [...prevMessages, messages[action]]);
   }
 
   return (
     <>
       <form onClick={handleSubmit}>
         <div className="inputContent">
-          <Input onChange={handleValue} maxLength={maxLength} />
-          <Button onClick={handleTaskAdd} />
+          <Input handleValue={handleValue} maxLength={maxLength} />
+          <Button handleTaskAdd={handleTaskAdd} />
         </div>
         <ul className="tasks">
           {tasks.map((task, index) => (
@@ -89,7 +83,10 @@ const TaskContent = () => {
           ))}
         </ul>
       </form>
-      <Message {...message} />
+      {/* Renderiza todas as mensagens */}
+      {messages.map((message, index) => (
+        <Message key={index} {...message} show={true} />
+      ))}
     </>
   );
 };

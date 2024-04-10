@@ -1,6 +1,12 @@
 import React from "react";
 
 const Message = ({ text, backgroundColor, show }) => {
+  console.log("Props recebidas pelo componente Message:", {
+    text,
+    backgroundColor,
+    show,
+  });
+
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {

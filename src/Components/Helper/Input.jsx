@@ -1,13 +1,13 @@
 import React from "react";
 
-const TaskInput = ({ onChange, maxLength }) => {
+const TaskInput = ({ handleValue, maxLength }) => {
   return (
     <input
       className="taskInput"
       type="text"
       placeholder="Escreva a task..."
       maxLength={maxLength}
-      onChange={onChange}
+      onChange={handleValue}
     />
   );
 };

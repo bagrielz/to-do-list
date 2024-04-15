@@ -143,9 +143,19 @@ table {
   color: #363a49;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+
 body {
   background: #2e2e36;
   max-width: 100%;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -155,12 +165,12 @@ body {
   margin-top: 96px;
 }
 
-.inputContent {
+.input-container {
   display: flex;
   gap: 24px;
 }
 
-.taskInput {
+.new-task-input {
   width: 390px;
   height: 56px;
   background: #363a49;
@@ -172,16 +182,16 @@ body {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.taskInput::placeholder {
+.new-task-input::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.taskInput:focus, .taskInput:hover {
+.new-task-input:focus, .new-task-input:hover {
   outline: none;
   border-color: #96ff8d;
 }
 
-.Button {
+.new-task-button {
   height: 56px;
   width: 146px;
   background: #96ff8d;
@@ -191,89 +201,73 @@ body {
   border-radius: 4px;
 }
 
-.Button:hover {
+.new-task-button:hover {
   background: #8aff80;
 }
 
-.tasks {
+.tasks-container {
   margin-top: 40px;
+  height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.tasks li {
-  height: 56px;
+.tasks-container .task-item {
+  min-height: 56px;
   width: 100%;
   padding: 0 24px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  animation: fade 0.4s ease;
   background: #363a49;
   border-radius: 4px;
   color: rgba(255, 255, 255, 0.8);
   transition: 0.3s;
 }
 
-.tasks li:hover {
+.tasks-container .task-item:hover {
   background: rgba(150, 255, 141, 0.1);
   color: #96ff8d;
 }
 
-.tasks li input {
-  width: 80%;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 0;
+.tasks-container .task-item .completed {
+  text-decoration: line-through;
 }
 
-.tasks li input:focus {
-  outline: none;
-}
-
-.tasks li .iconBtn {
+.tasks-container .task-item .icon-btn {
   cursor: pointer;
-}
-
-.tasks li .iconBtn:nth-child(1) {
-  margin-right: 16px;
-}
-
-.task-enter {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.task-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.iconBtn {
-  background: transparent;
   border: none;
-  padding: 0;
+  background: transparent;
 }
 
-.message {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 300ms, transform 300ms;
+footer {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 32px;
-  right: 32px;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 4px;
+  padding: 120px 0;
 }
 
-.message.show {
-  opacity: 1;
-  transform: translateX(0);
+footer p {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+footer p span {
+  color: #fff;
+}
+
+.custom-toast-body {
+  color: #282a36;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
